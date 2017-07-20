@@ -9,20 +9,40 @@ jobs:
   build:
     <<: *defaults
     steps:
-      - run: echo 'Build!'
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: install-yarn-jest
+          command: 'sudo npm i -g yarn jest eslint'
+      - run:
+          name: run-yarn
+          command: yarn install
   test:
     <<: *defaults
     steps:
-      - run: echo 'Test!'
+      - run:
+          name: test
+          command: npm test
   lint:
     <<: *defaults
     steps:
-      - run: echo 'Lint!'
+      - run:
+          name: lint
+          command: npm run lint
 
 workflows:
   version: 2
-  build:
+  build-lint-and-test:
     jobs:
       - build
-      - test
-      - lint
+      - test:
+        - requires:
+          - build
+      - lint:
+        - requires:
+          - build
