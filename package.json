@@ -1,7 +1,7 @@
 {
   "name": "node-circle",
   "version": "1.0.0",
-  "description": "",
+  "description": "Testing Node using Circle 2 workflows",
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test node node_modules/jest-cli/bin/jest.js",
@@ -9,7 +9,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "babel-eslint": "^7.2.3",
     "eslint": "^3.19.0",
