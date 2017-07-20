@@ -1,0 +1,21 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "env": {
+    "jest": true
+  },
+  "rules": {
+    "semi": [2, "never"],
+    "eqeqeq": [2, "allow-null"],
+    "no-underscore-dangle": ["off"],
+    "space-before-function-paren": ["off"],
+    "no-console": ["off"],
+    "new-cap": ["off"],
+    "arrow-body-style": ["off"],
+    "generator-star-spacing": 0,
+    "react/forbid-prop-types": ["off"],
+    "import/newline-after-import": ["off"],
+    "jsx-a11y/href-no-hash": ["off"],
+    "camelcase": ["error", { "properties": "always" }]
+  }
+}
