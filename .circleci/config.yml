@@ -30,7 +30,7 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: test
-          command: NODE_ENV=test node node_modules/jest-cli/bin/jest.js
+          command: npm test
   lint:
     <<: *defaults
     steps:
@@ -39,7 +39,7 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: lint
-          command: node node_modules/eslint/bin/eslint.js --ext=js .
+          command: npm run lint
 
 workflows:
   version: 2

@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test jest",
-    "lint": "eslint --ext=js ."
+    "test": "NODE_ENV=test node node_modules/jest-cli/bin/jest.js",
+    "lint": "node node_modules/eslint/bin/eslint.js --ext=js ."
   },
   "keywords": [],
   "author": "",
