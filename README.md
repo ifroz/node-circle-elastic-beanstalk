@@ -1,4 +1,4 @@
-# node-circle
+# node-circle [![CircleCI](https://img.shields.io/circleci/project/github/meme/node-circle.svg)]()
 An example of testing Node using Circle 2
 
 ## Usage
