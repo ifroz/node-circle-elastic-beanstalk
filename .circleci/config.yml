@@ -12,30 +12,34 @@ jobs:
       - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: install-yarn-jest
+          command: 'sudo npm i -g yarn'
+      - run:
+          name: run-yarn
+          command: yarn install
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - ./node_modules
-      - run:
-          name: install-yarn-jest
-          command: 'sudo npm i -g yarn jest eslint'
-      - run:
-          name: run-yarn
-          command: yarn install
   test:
     <<: *defaults
     steps:
       - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: test
-          command: npm test
+          command: NODE_ENV=test node node_modules/eslint/bin/jest.js
   lint:
     <<: *defaults
     steps:
       - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: lint
-          command: npm run lint
+          command: node node_modules/eslint/bin/eslint.js --ext=js .
 
 workflows:
   version: 2
