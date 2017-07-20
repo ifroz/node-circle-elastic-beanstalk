@@ -30,7 +30,7 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: test
-          command: NODE_ENV=test node node_modules/eslint/bin/jest.js
+          command: NODE_ENV=test node node_modules/jest-cli/bin/jest.js
   lint:
     <<: *defaults
     steps:
