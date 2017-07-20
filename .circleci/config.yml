@@ -3,7 +3,7 @@ version: 2.0
 defaults: &defaults
   working_directory: ~/node-circle
   docker:
-    - image: circleci/node:8.1.4
+    - image: kkarczmarczyk/node-yarn:8.0
 
 jobs:
   build:
@@ -12,9 +12,6 @@ jobs:
       - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
-      - run:
-          name: install-yarn-jest
-          command: 'sudo npm i -g yarn'
       - run:
           name: run-yarn
           command: yarn install
