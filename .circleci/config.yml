@@ -25,12 +25,14 @@ jobs:
   test:
     <<: *defaults
     steps:
+      - checkout
       - run:
           name: test
           command: npm test
   lint:
     <<: *defaults
     steps:
+      - checkout
       - run:
           name: lint
           command: npm run lint
