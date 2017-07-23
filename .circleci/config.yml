@@ -37,6 +37,15 @@ jobs:
       - run:
           name: lint
           command: npm run lint
+  deploy:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run: pip install awsebcli
+      - run: bash ./.circleci/setup-eb.sh
+      - run: eb deploy --timeout 45
 
 workflows:
   version: 2
@@ -49,3 +58,8 @@ workflows:
       - lint:
           requires:
             - build
+      - deploy:
+          type: approval
+          requires:
+            - test
+            - lint
