@@ -38,12 +38,13 @@ jobs:
           name: lint
           command: npm run lint
   deploy:
-    <<: *defaults
+    working_directory: ~/node-circle
+    docker:
+      - image: coxauto/aws-ebcli
     steps:
       - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
-      - run: pip install awsebcli
       - run: bash ./.circleci/setup-eb.sh
       - run: eb deploy --timeout 45
 
