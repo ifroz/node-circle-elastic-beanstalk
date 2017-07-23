@@ -58,8 +58,11 @@ workflows:
       - lint:
           requires:
             - build
-      - deploy:
+      - hold:
           type: approval
           requires:
             - test
             - lint
+      - deploy:
+          requires:
+            - hold
