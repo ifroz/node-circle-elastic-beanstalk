@@ -45,6 +45,7 @@ jobs:
       - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
+      - run: ./.circleci/generate_configuration.sh
       - run: eb deploy --timeout 45
 
 workflows:

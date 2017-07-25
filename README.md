@@ -6,6 +6,8 @@ To set this up yourself, fork this repository and follow these steps:
 1. Add it to Circle, add your AWS environment variables
 - AWS_ACCESS_KEY_ID
 - AWS_SECRET_ACCESS_KEY
+- APPLICATION_NAME
+- EC2_KEYNAME
 2. Fork https://gist.github.com/meme/a8c7f5429feae40404ec12490543270b
 3. Configure the `.ebextensions/env.config` to use your fork of the gist
 
