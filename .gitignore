@@ -1,5 +1,5 @@
 node_modules/
-result/
+result
 npm-debug.*
 
 # Elastic Beanstalk Files
