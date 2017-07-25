@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-require("./index").listen(8081)
+require('./index').listen(8081)
