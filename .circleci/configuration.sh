@@ -5,4 +5,4 @@
 # eval is evil
 while IFS= read line; do # Wiping IFS preserves read tabs/spaces
   eval "echo \"$line\"" >> .elasticbeanstalk/config.yml # Placing echo and line inside of a string preserves tabs/spaces
-done < ".elasticbeanstalk/deploy.cfg.yml"
+done < ".elasticbeanstalk/development.cfg.yml"

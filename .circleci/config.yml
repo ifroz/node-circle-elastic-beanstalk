@@ -1,22 +1,20 @@
-version: 2.0
+version: 2
 
 defaults: &defaults
-  working_directory: ~/node-circle
+  working_directory: ~/node-circle-elastic-beanstalk
   docker:
-    - image: kkarczmarczyk/node-yarn:8.0
+    - image: node:8.4.0
 
 jobs:
   build:
     <<: *defaults
     steps:
       - checkout
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
       - run:
-          name: run-yarn
-          command: yarn install
+          name: install dependencies
+          command: yarn install --freeze-lockfile
       - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "yarn.lock" }}
           paths:
             - ./node_modules
   test:
@@ -24,7 +22,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "yarn.lock" }}
       - run:
           name: test
           command: npm test
@@ -33,18 +31,18 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "yarn.lock" }}
       - run:
           name: lint
           command: npm run lint
   deploy:
-    working_directory: ~/node-circle
+    working_directory: ~/node-circle-elastic-beanstalk
     docker:
       - image: coxauto/aws-ebcli
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "yarn.lock" }}
       - run: ./.circleci/generate_configuration.sh
       - run: eb use $APPLICATION_ENVIRONMENT
       - run: eb deploy --timeout 45
